@@ -9,9 +9,12 @@ import { useHistory } from 'react-router-dom';
 import { Link } from "react-router-dom";
 
 const Post=(props)=>{
-    const { title, content, files, id } =props.post
+    const { title, content, files, id, user } =props.post
+    console.log(user)
     const dispatch=useDispatch();
     const history= useHistory();
+    const userinfo= JSON.parse(localStorage.getItem('userinfo'));
+    
     return (
         <Card>
             <Row>
@@ -22,6 +25,7 @@ const Post=(props)=>{
                 <Col>
                     <Card.Body>
                         <Card.Title>{title}</Card.Title>
+                        <Card.Subtitle className="mb-2 text-muted">by. {user.firstname+" "+user.lastname}</Card.Subtitle>
                         <Card.Text>
                         {content}
                         </Card.Text>
@@ -34,8 +38,9 @@ const Post=(props)=>{
                     <Button variant="light"></Button>
                     </Col>
                     <Col style={{textAlign: "right"}}>
-                        <Link to={`/posts/${id}/edit`} onClick={()=> props.setCurrentPostId(id)}><img src={Edit} width="30" height="30" alt="logo"/>Edit</Link>
-                        <img src={Delete} onClick={()=>dispatch(deletePost(id, history))} width="30" height="30" alt="logo"/>Delete
+                    {(userinfo && userinfo.user.id === user.id) &&
+                        <><Link to={`/posts/${id}/edit`} onClick={()=> props.setCurrentPostId(id)}><img src={Edit} width="30" height="30" alt="logo"/>Edit</Link>
+                        <img src={Delete} onClick={()=>dispatch(deletePost(id, history))} width="30" height="30" alt="logo"/>Delete</>}
                     </Col>
                 </Row>
             </Card.Footer>

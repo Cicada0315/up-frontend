@@ -5,6 +5,7 @@ import logo from '../images/Logo.png';
 import { Navbar, Nav, Button } from 'react-bootstrap';
 import {  useLocation } from 'react-router-dom';
 import { useHistory } from 'react-router-dom';
+import decode from 'jwt-decode';
 
 const NavBar=()=>{
     const location=useLocation();
@@ -13,12 +14,20 @@ const NavBar=()=>{
     const [user, setUser]=useState(JSON.parse(localStorage.getItem('userinfo')));
 
     useEffect(() => {
+        if(user){
+            if(user.jwt){
+                const decodedToken = decode(user.jwt);
+                if (decodedToken.exp * 1000 < new Date().getTime()){
+                    logout();
+                } 
+            }
+        }
         setUser(JSON.parse(localStorage.getItem('userinfo')));
     }, [location]);
 
     const logout=(e)=>{
         dispatch({type: 'SIGN_OUT'});
-        history.push('/auth');
+        history.push('/login');
         setUser(null);
     }
 

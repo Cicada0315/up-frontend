@@ -22,7 +22,7 @@ export const signup = (inputs, history) => async (dispatch) => {
 
 export const signin = (inputs, history) => async (dispatch) => {
     try {
-        const res = await API.post('/users', {
+        const res = await API.post('/login', {
             user: {
               email: inputs.email,
               password: inputs.password

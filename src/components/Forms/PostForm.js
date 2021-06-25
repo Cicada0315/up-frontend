@@ -7,11 +7,11 @@ import { createPost, updatePost } from '../../actions/postsAction'
 
 const PostForm = (props) => {
     const { currentPostId, setCurrentPostId }=props
-    console.log(currentPostId)
     const history = useHistory();
     const dispatch = useDispatch();
     const [postinfo, setPostinfo] = useState({ title: '', content: '', files: '' });
     const post = useSelector((state) => (currentPostId ? state.posts.find((p) => p.id === currentPostId) : null));
+    const userinfo= JSON.parse(localStorage.getItem('userinfo'))
     
     useEffect(()=>{
         if(post){
@@ -31,9 +31,9 @@ const PostForm = (props) => {
         e.preventDefault();
         //console.log(postinfo)
         if(currentPostId){
-            dispatch(updatePost(currentPostId, {...postinfo}, history));
+            dispatch(updatePost(currentPostId, {...postinfo, user_id: userinfo.user.id }, history));
         }else{
-            dispatch(createPost({...postinfo}, history));
+            dispatch(createPost({...postinfo, user_id: userinfo.user.id }, history));
         }
         clear();
     };
@@ -45,6 +45,13 @@ const PostForm = (props) => {
         });
     };
 
+    if(!userinfo){
+        return(
+            <div>
+                {history.push('/login')};
+            </div>
+        )
+    };
     return (
         <Card className="center">
             {!post?<h1 className="text-center">Create Post</h1>: <h1 className="text-center">Edit Post</h1>}
