@@ -5,7 +5,7 @@ import { Navbar, Nav, Button } from 'react-bootstrap';
 import {  useLocation } from 'react-router-dom';
 
 const NavBar=()=>{
-    const user= true;
+    const user= false;
     const location=useLocation();
 
     useEffect(() => {
@@ -19,7 +19,7 @@ const NavBar=()=>{
             <Nav className="me-auto">
                 <Nav.Link href="/about">AboutUps</Nav.Link>
                 <Nav.Link href="/posts">AllUps</Nav.Link>
-                {!user?(<><Nav.Link href="/auth"><Button variant="primary">Sign In</Button></Nav.Link></>):
+                {!user?(<><Nav.Link href="/login"><Button variant="primary">Sign In</Button></Nav.Link></>):
                     (<><Nav.Link href="/posts/new">CreateUp</Nav.Link>
                     <Button variant="primary">Sign Out</Button></>)
                 }

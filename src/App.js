@@ -3,6 +3,7 @@ import NavBar from './components/NavBar';
 import Footer from './components/Footer';
 import Posts from './components/Posts'
 import Form from './components/Forms/PostForm';
+import Auth from './components/Forms/Auth'
 import { getPosts } from './actions/postsAction';
 import { useDispatch } from 'react-redux';
 
@@ -27,6 +28,7 @@ const App = () => {
             <Router>
             <NavBar />
             <Switch>
+            <Route exact path="/login" component={() => <Auth />} />
             <Route exact path="/posts/new" component={() => <Form currentPostId={currentPostId} setCurrentPostId={setCurrentPostId}/>} />
             <Route exact path="/posts/" component={() => <Posts currentPostId={currentPostId} setCurrentPostId={setCurrentPostId}/>} />
             <Route exact path="/posts/:currentPostId/edit" component={() => <Form currentPostId={currentPostId} setCurrentPostId={setCurrentPostId}/>} />
