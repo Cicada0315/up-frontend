@@ -10,7 +10,6 @@ import { Link } from "react-router-dom";
 
 const Post=(props)=>{
     const { title, content, files, id, user } =props.post
-    console.log(user)
     const dispatch=useDispatch();
     const history= useHistory();
     const userinfo= JSON.parse(localStorage.getItem('userinfo'));
@@ -40,7 +39,7 @@ const Post=(props)=>{
                     <Col style={{textAlign: "right"}}>
                     {(userinfo && userinfo.user.id === user.id) &&
                         <><Link to={`/posts/${id}/edit`} onClick={()=> props.setCurrentPostId(id)}><img src={Edit} width="30" height="30" alt="logo"/>Edit</Link>
-                        <img src={Delete} onClick={()=>dispatch(deletePost(id, history))} width="30" height="30" alt="logo"/>Delete</>}
+                        <img src={Delete} onClick={()=>dispatch(deletePost(id, history, userinfo.jwt))} width="30" height="30" alt="logo"/>Delete</>}
                     </Col>
                 </Row>
             </Card.Footer>
