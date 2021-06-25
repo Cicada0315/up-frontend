@@ -1,9 +1,14 @@
 import React, { useState } from 'react'
 import { Form, Button, Card } from 'react-bootstrap';
+import { useHistory } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { signup } from '../../actions/authAction'
 
 const Auth = () => {
     const [isSignup, setSignup]=useState(false);
-    const [inputs, setInputs]=useState({ firstname: '', lastname: '', username: '', password: '', cpassword: '' });
+    const [inputs, setInputs]=useState({ firstname: '', lastname: '', email: '', password: '', cpassword: '' });
+    const history = useHistory();
+    const dispatch = useDispatch();
 
     const swichMode= (e) => {
         setSignup((prev)=> !prev);
@@ -18,7 +23,11 @@ const Auth = () => {
 
     const handleSubmit=(e)=>{
         e.preventDefault();
-        console.log(inputs)
+        if(isSignup){
+            dispatch(signup(inputs, history));         
+        }else{
+
+        }
     };
 
     return (
@@ -40,8 +49,8 @@ const Auth = () => {
                         </>
                     )}
                     <Form.Group controlId="username">
-                    <Form.Label>Username</Form.Label>
-                    <Form.Control type="text" name="username" value={inputs.username} onChange={handleonChange} />
+                    <Form.Label>Email</Form.Label>
+                    <Form.Control type="email" name="email" value={inputs.username} onChange={handleonChange} />
                     </Form.Group>
 
                     <Form.Group controlId="password">
