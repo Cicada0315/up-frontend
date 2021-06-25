@@ -3,10 +3,10 @@ import { Form, Button, Card } from 'react-bootstrap';
 import FileBase from 'react-file-base64';
 import { useHistory } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux'
-import { createPost } from '../../actions/postsAction'
+import { createPost, updatePost } from '../../actions/postsAction'
 
 const PostForm = (props) => {
-    const { currentPostId }=props
+    const { currentPostId, setCurrentPostId }=props
     console.log(currentPostId)
     const history = useHistory();
     const dispatch = useDispatch();
@@ -31,7 +31,7 @@ const PostForm = (props) => {
         e.preventDefault();
         //console.log(postinfo)
         if(currentPostId){
-            //dispatch(updatePost(props.currentPostId, {...postinfo}));
+            dispatch(updatePost(currentPostId, {...postinfo}));
         }else{
             dispatch(createPost({...postinfo}));
         }
@@ -40,6 +40,7 @@ const PostForm = (props) => {
     }
 
     const clear=()=>{
+        setCurrentPostId(null);
         setPostinfo({
             title: '', content: '', files: '' 
         })

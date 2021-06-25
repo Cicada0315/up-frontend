@@ -17,10 +17,11 @@ import {
 const App = () => {
     const dispatch=useDispatch();
     const [currentPostId, setCurrentPostId] = useState(null);
+    console.log(currentPostId)
 
     useEffect(()=>{
         dispatch(getPosts());
-    }, [dispatch]);
+    }, [currentPostId, dispatch]);
 
     return (
         <Container>

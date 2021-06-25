@@ -6,6 +6,9 @@ export default function posts(state= [], action){
         case 'CREATE_POST':
             return [...state, action.payload];
         
+        case 'UPDATE_POST':
+            return state.map((state) => (state._id === action.payload.id ? action.payload : state));
+        
         default:
             return state;
     }
