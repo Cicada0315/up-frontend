@@ -1,15 +1,11 @@
-export default function posts(state={posts: []}, action){
+export default function posts(state= [], action){
     switch (action.type) {
         case 'FETCH_POSTS':
-            return {
-                ...state, 
-                posts: [action.payload]
-            };
+            return action.payload;
+           
         case 'CREATE_POST':
-            return {
-                ...state, 
-                posts: [...state.posts, action.payload]
-            };
+            return [...state, action.payload];
+        
         default:
             return state;
     }
