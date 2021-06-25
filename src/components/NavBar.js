@@ -4,7 +4,7 @@ import logo from '../images/Logo.png';
 import { Navbar, Nav, Button } from 'react-bootstrap';
 
 const NavBar=()=>{
-    const user= false;
+    const user= true;
     return(
         <Navbar bg="light" expand="lg">
             <Navbar.Brand href="/"><img src={logo} width="30" height="30" alt="logo"/> UP</Navbar.Brand>
