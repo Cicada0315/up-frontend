@@ -8,7 +8,7 @@ export default function posts(state={posts: []}, action){
         case 'CREATE_POST':
             return {
                 ...state, 
-                posts: [...posts, action.payload]
+                posts: [...state.posts, action.payload]
             };
         default:
             return state;

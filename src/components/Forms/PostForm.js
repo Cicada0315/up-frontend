@@ -2,9 +2,12 @@ import React, { useState } from 'react';
 import { Form, Button, Card } from 'react-bootstrap';
 import FileBase from 'react-file-base64';
 import { useHistory } from 'react-router-dom';
+import { useDispatch } from 'react-redux'
+import { createPost } from '../../actions/postsAction'
 
 const PostForm = () => {
     const history = useHistory();
+    const dispatch = useDispatch();
     const [postinfo, setPostinfo] = useState({ title: '', content: '', files: '' });
 
     const handleonChange = (e) => {
@@ -16,7 +19,8 @@ const PostForm = () => {
 
     const handleSubmit=(e)=>{
         e.preventDefault();
-        console.log(postinfo)
+        //console.log(postinfo)
+        dispatch(createPost(postinfo));
         history.push('/');
         clear();
     }
