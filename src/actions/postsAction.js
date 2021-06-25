@@ -10,21 +10,33 @@ export const getPosts = () => async (dispatch) => {
     }
 };
 
-export const createPost = (post) => async (dispatch) => {
+export const createPost = (post, history) => async (dispatch) => {
     try{
         const res = await API.post('/posts', post);
         console.log(res.data);
-        dispatch({type: 'CREATE_POST', payload: res.data })
+        dispatch({type: 'CREATE_POST', payload: res.data });
+        history.push('/');
     } catch (error){
-        console.log(error)
+        console.log(error);
     }
-}
+};
 
-export const updatePost = (id, post) => async (dispatch) => {
+export const updatePost = (id, post, history) => async (dispatch) => {
     try {
         const res = await API.patch(`/posts/${id}`, post);
         console.log(res.data);
         dispatch({ type: 'UPDATE_POST', payload: res.data });
+        history.push('/');
+    } catch (error) {
+        console.log(error);
+    }
+};
+
+export const deletePost = (id, history) => async (dispatch) => {
+    try {
+        await API.delete(`/posts/${id}`);
+        dispatch({ type: 'DELETE_POST', payload: id });
+        history.push('/');
     } catch (error) {
         console.log(error);
     }

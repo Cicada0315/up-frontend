@@ -17,7 +17,6 @@ import {
 const App = () => {
     const dispatch=useDispatch();
     const [currentPostId, setCurrentPostId] = useState(null);
-    console.log(currentPostId)
 
     useEffect(()=>{
         dispatch(getPosts());

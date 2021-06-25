@@ -16,7 +16,7 @@ const PostForm = (props) => {
     useEffect(()=>{
         if(post){
             setPostinfo(post);
-        }
+        };
     }, [post])
 
 
@@ -31,20 +31,19 @@ const PostForm = (props) => {
         e.preventDefault();
         //console.log(postinfo)
         if(currentPostId){
-            dispatch(updatePost(currentPostId, {...postinfo}));
+            dispatch(updatePost(currentPostId, {...postinfo}, history));
         }else{
-            dispatch(createPost({...postinfo}));
+            dispatch(createPost({...postinfo}, history));
         }
-        history.push('/');
         clear();
-    }
+    };
 
     const clear=()=>{
         setCurrentPostId(null);
         setPostinfo({
             title: '', content: '', files: '' 
-        })
-    }
+        });
+    };
 
     return (
         <Card className="center">

@@ -1,10 +1,16 @@
-import React from 'react'
+import React, {useEffect} from 'react'
 import logo from '../images/Logo.png';
 
 import { Navbar, Nav, Button } from 'react-bootstrap';
+import {  useLocation } from 'react-router-dom';
 
 const NavBar=()=>{
     const user= true;
+    const location=useLocation();
+
+    useEffect(() => {
+    }, [location]);
+
     return(
         <Navbar bg="light" expand="lg">
             <Navbar.Brand href="/"><img src={logo} width="30" height="30" alt="logo"/> UP</Navbar.Brand>
