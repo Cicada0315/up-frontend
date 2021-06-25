@@ -1,14 +1,15 @@
-import React, {useEffect} from 'react'
+import React, { useState, useEffect } from 'react'
 import logo from '../images/Logo.png';
 
 import { Navbar, Nav, Button } from 'react-bootstrap';
 import {  useLocation } from 'react-router-dom';
 
 const NavBar=()=>{
-    const user= false;
     const location=useLocation();
+    const [user, setUser]=useState(JSON.parse(localStorage.getItem('userinfo')));
 
     useEffect(() => {
+        setUser(JSON.parse(localStorage.getItem('userinfo')));
     }, [location]);
 
     return(
