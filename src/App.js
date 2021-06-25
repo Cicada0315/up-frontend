@@ -14,9 +14,12 @@ import {
 const App = () => {
     return (
         <Container>
+            <Router>
             <NavBar />
-            <Posts />
-            
+            <Switch>
+            <Route path="/" render={() => <Posts />} />
+            </Switch>
+            </Router>
             <Footer />
         </Container>
     );

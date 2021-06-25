@@ -1,7 +1,7 @@
 import React from 'react'
 import logo from '../images/Logo.png';
 
-import { Navbar, Container, Nav, Button } from 'react-bootstrap';
+import { Navbar, Nav, Button } from 'react-bootstrap';
 
 const NavBar=()=>{
     const user= false;
