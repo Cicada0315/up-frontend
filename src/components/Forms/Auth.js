@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { Form, Button, Card } from 'react-bootstrap';
 import { useHistory } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
-import { signup } from '../../actions/authAction'
+import { signin, signup } from '../../actions/authAction'
 
 const Auth = () => {
     const [isSignup, setSignup]=useState(false);
@@ -26,7 +26,7 @@ const Auth = () => {
         if(isSignup){
             dispatch(signup(inputs, history));         
         }else{
-
+            dispatch(signin(inputs, history));
         }
     };
 

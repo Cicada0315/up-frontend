@@ -1,16 +1,26 @@
 import React, { useState, useEffect } from 'react'
+import { useDispatch } from 'react-redux';
 import logo from '../images/Logo.png';
 
 import { Navbar, Nav, Button } from 'react-bootstrap';
 import {  useLocation } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 
 const NavBar=()=>{
     const location=useLocation();
+    const dispatch = useDispatch();
+    const history = useHistory();
     const [user, setUser]=useState(JSON.parse(localStorage.getItem('userinfo')));
 
     useEffect(() => {
         setUser(JSON.parse(localStorage.getItem('userinfo')));
     }, [location]);
+
+    const logout=(e)=>{
+        dispatch({type: 'SIGN_OUT'});
+        history.push('/auth');
+        setUser(null);
+    }
 
     return(
         <Navbar bg="light" expand="lg">
@@ -22,7 +32,7 @@ const NavBar=()=>{
                 <Nav.Link href="/posts">AllUps</Nav.Link>
                 {!user?(<><Nav.Link href="/login"><Button variant="primary">Sign In</Button></Nav.Link></>):
                     (<><Nav.Link href="/posts/new">CreateUp</Nav.Link>
-                    <Button variant="primary">Sign Out</Button></>)
+                    <Button variant="primary" onClick={logout}>Sign Out</Button></>)
                 }
             </Nav>
             </Navbar.Collapse>

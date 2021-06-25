@@ -19,3 +19,19 @@ export const signup = (inputs, history) => async (dispatch) => {
         console.log(error);
     }
 };
+
+export const signin = (inputs, history) => async (dispatch) => {
+    try {
+        const res = await API.post('/users', {
+            user: {
+              email: inputs.email,
+              password: inputs.password
+            }
+        });
+        const data=res.data;
+        dispatch({ type: 'LOG_IN', data });
+        history.push('/');
+    } catch (error) {
+        console.log(error);
+    }
+};
