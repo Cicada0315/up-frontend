@@ -1,14 +1,24 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Form, Button, Card } from 'react-bootstrap';
 import FileBase from 'react-file-base64';
 import { useHistory } from 'react-router-dom';
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { createPost } from '../../actions/postsAction'
 
-const PostForm = () => {
+const PostForm = (props) => {
+    const { currentPostId }=props
+    console.log(currentPostId)
     const history = useHistory();
     const dispatch = useDispatch();
     const [postinfo, setPostinfo] = useState({ title: '', content: '', files: '' });
+    const post = useSelector((state) => (currentPostId ? state.posts.find((p) => p.id === currentPostId) : null));
+    
+    useEffect(()=>{
+        if(post){
+            setPostinfo(post);
+        }
+    }, [post])
+
 
     const handleonChange = (e) => {
         setPostinfo({
@@ -20,7 +30,11 @@ const PostForm = () => {
     const handleSubmit=(e)=>{
         e.preventDefault();
         //console.log(postinfo)
-        dispatch(createPost(postinfo));
+        if(currentPostId){
+            //dispatch(updatePost(props.currentPostId, {...postinfo}));
+        }else{
+            dispatch(createPost({...postinfo}));
+        }
         history.push('/');
         clear();
     }
@@ -33,7 +47,7 @@ const PostForm = () => {
 
     return (
         <Card className="center">
-            <h1 className="text-center">Create Post</h1>
+            {!post?<h1 className="text-center">Create Post</h1>: <h1 className="text-center">Edit Post</h1>}
             <div className="login-form">
                 <Form onSubmit={handleSubmit}>
                     <Form.Group controlId="title">
@@ -49,7 +63,7 @@ const PostForm = () => {
                     <Form.Group controlId="content">
                     <FileBase type="file" multiple={false} onDone={({ base64 }) => setPostinfo({ ...postinfo, files: base64 })} />
                     </Form.Group>
-                    <Button variant="primary" type="submit">CreatePost</Button>                   
+                    {!post?<Button variant="primary" type="submit">CreatePost</Button>: <Button variant="primary" type="submit">EditPost</Button>}                   
                 </Form>
             </div>
         </Card>

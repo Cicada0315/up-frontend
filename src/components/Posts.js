@@ -3,7 +3,7 @@ import Post from './Post';
 import { useSelector } from 'react-redux';
 import { Spinner } from 'react-bootstrap';
 
-const Posts=()=>{
+const Posts=(props)=>{
     const posts = useSelector((state) => state.posts);
     return (
         !posts.length ? 
@@ -11,7 +11,7 @@ const Posts=()=>{
             <span className="sr-only">Loading...</span>
         </Spinner>:
         <div>
-        {posts.map(p=><Post key={p.id} post={p}/>)}
+        {posts.map(p=><Post key={p.id} post={p} currentPostId={props.currentPostId} setCurrentPostId={props.setCurrentPostId}/>)}
         </div>
     )
 }

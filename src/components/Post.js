@@ -1,8 +1,12 @@
 import React from 'react'
-import {Card, Col, Row} from 'react-bootstrap';
+import {Card, Col, Row, Button} from 'react-bootstrap';
+import Edit from '../images/edit.png'
+import Delete from '../images/Black_Trash.ico'
+
+import { Link } from "react-router-dom";
 
 const Post=(props)=>{
-    const { title, content, files } =props.post
+    const { title, content, files, id } =props.post
     return (
         <Card>
             <Row>
@@ -19,6 +23,17 @@ const Post=(props)=>{
                     </Card.Body>
                 </Col>
             </Row>
+            <Card.Footer>
+                <Row>
+                    <Col>
+                    <Button variant="light"></Button>
+                    </Col>
+                    <Col style={{textAlign: "right"}}>
+                        <Link to={`/posts/${id}/edit`} onClick={()=> props.setCurrentPostId(id)}><img src={Edit} width="30" height="30" alt="logo"/>Edit</Link>
+                        <img src={Delete} width="30" height="30" alt="logo"/>Delete
+                    </Col>
+                </Row>
+            </Card.Footer>
         </Card>
     )
 
