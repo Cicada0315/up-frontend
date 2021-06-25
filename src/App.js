@@ -1,7 +1,7 @@
 import React from 'react';
-import NavBar from './NavBar';
+import NavBar from './components/NavBar';
 import Footer from './components/Footer';
-
+import Posts from './components/Posts'
 
 import { Container } from 'react-bootstrap';
 
@@ -14,12 +14,10 @@ import {
 const App = () => {
     return (
         <Container>
-          
-          <Switch>
-          
-          </Switch>
-          
-          <Footer />
+            <NavBar />
+            <Posts />
+            
+            <Footer />
         </Container>
     );
 };

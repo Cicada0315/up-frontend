@@ -1,5 +1,5 @@
 import React from 'react'
-import logo from './images/Logo.png';
+import logo from '../images/Logo.png';
 
 import { Navbar, Container, Nav, Button } from 'react-bootstrap';
 
@@ -15,7 +15,7 @@ const NavBar=()=>{
                 <Nav.Link href="/posts">AllUps</Nav.Link>
                 {!user?(<><Nav.Link href="/auth"><Button variant="primary">Sign In</Button></Nav.Link></>):
                     (<><Nav.Link href="/posts/new">CreateUp</Nav.Link>
-                    <Button onClick={logout} variant="primary">Sign Out</Button></>)
+                    <Button variant="primary">Sign Out</Button></>)
                 }
             </Nav>
             </Navbar.Collapse>
