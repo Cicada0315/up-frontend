@@ -35,21 +35,13 @@ const Post=(props)=>{
                     </Card.Body>
                 </Col>
             </Row>
-            <Card.Footer>
-                <Row>
-                    <Col>
-                    <Button variant="light"></Button>
-                    </Col>
-                    <Col style={{textAlign: "right"}}>
-                    {(userinfo && userinfo.user.id === user.id) &&
-                        <><Link to={`/posts/${id}/edit`} onClick={()=> props.setCurrentPostId(id)}><img src={Edit} width="30" height="30" alt="logo"/>Edit</Link>
-                        <img src={Delete} onClick={handleDelete} width="30" height="30" alt="logo"/>Delete</>}
-                    </Col>
-                </Row>
+            <Card.Footer style={{textAlign: "right"}}>
+                {(userinfo && userinfo.user.id === user.id) &&
+                    (<><Button variant="light" onClick={()=> props.setCurrentPostId(id)}><Link to={`/posts/${id}/edit`} style={{color: 'black', textDecoration: 'none'}}><img src={Edit} width="30" height="30" alt="logo"/>Edit</Link></Button>
+                    <Button variant="light" onClick={handleDelete}><img src={Delete} width="30" height="30" alt="logo"/>Delete</Button></>)}    
             </Card.Footer>
         </Card>
     )
-
 }
 
 export default Post;
