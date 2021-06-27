@@ -8,7 +8,7 @@ import { useHistory } from 'react-router-dom';
 import decode from 'jwt-decode';
 
 const NavBar=()=>{
-    const location=useLocation();
+    const location = useLocation();
     const dispatch = useDispatch();
     const history = useHistory();
     const [user, setUser]=useState(JSON.parse(localStorage.getItem('userinfo')));

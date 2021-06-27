@@ -23,23 +23,25 @@ export const createPost = (post, history, token) => async (dispatch) => {
     }
 };
 
-export const updatePost = (id, post, history, token) => async (dispatch) => {
+export const updatePost = (id, post, history, token, setCurrentPostId) => async (dispatch) => {
     try {
         const res = await API.patch(`/posts/${id}`, {
             Authorization: 'Bearer ' + token,
             post
         })
         dispatch({ type: 'UPDATE_POST', payload: res.data });
+        setCurrentPostId(null);
         history.push('/posts');
     } catch (error) {
         console.log(error);
     }
 };
 
-export const deletePost = (id, history, token) => async (dispatch) => {
+export const deletePost = (id, history, token, setSubmitted) => async (dispatch) => {
     try {
         await API.delete(`/posts/${id}`)
         await dispatch({ type: 'DELETE_POST', payload: id });
+        setSubmitted(false);
         history.push('/posts');
     } catch (error) {
         console.log(error);

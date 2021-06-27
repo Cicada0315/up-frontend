@@ -18,10 +18,11 @@ import {
 const App = () => {
     const dispatch=useDispatch();
     const [currentPostId, setCurrentPostId] = useState(null);
+    const [submitted, setSubmitted] = useState(false);
 
     useEffect(()=>{
         dispatch(getPosts());
-    }, [currentPostId, dispatch]);
+    }, [currentPostId, dispatch, submitted]);
 
     return (
         <Container>
@@ -30,9 +31,9 @@ const App = () => {
             <Switch>
             <Route exact path="/login" component={() => <Auth />} />
             <Route exact path="/posts/new" component={() => <Form currentPostId={currentPostId} setCurrentPostId={setCurrentPostId}/>} />
-            <Route exact path="/posts/" component={() => <Posts currentPostId={currentPostId} setCurrentPostId={setCurrentPostId}/>} />
+            <Route exact path="/posts/" component={() => <Posts currentPostId={currentPostId} setCurrentPostId={setCurrentPostId} setSubmitted={setSubmitted}/>} />
             <Route exact path="/posts/:currentPostId/edit" component={() => <Form currentPostId={currentPostId} setCurrentPostId={setCurrentPostId}/>} />
-            <Route path="/" render={() => <Posts currentPostId={currentPostId} setCurrentPostId={setCurrentPostId}/>} />
+            <Route path="/" render={() => <Posts currentPostId={currentPostId} setCurrentPostId={setCurrentPostId} setSubmitted={setSubmitted}/>} />
             </Switch>
             </Router>
             <Footer />
