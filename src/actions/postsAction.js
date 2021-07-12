@@ -3,7 +3,7 @@ const API = axios.create({ baseURL: 'http://127.0.0.1:3001' });
 
 export const getPosts = () => async (dispatch) => {
     try {
-        const res = await axios.get('http://127.0.0.1:3001/posts');
+        const res = await API.get('/posts');
         dispatch({ type: 'FETCH_POSTS', payload: res.data });
     } catch (error) {
         console.log(error);

@@ -8,7 +8,7 @@ import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 
 const Post=(props)=>{
-    const { title, content, files, id, user, likes } =props.post
+    const { title, content, files, id, user, likes } =props.post;
     const dispatch=useDispatch();
     const history= useHistory();
     const userinfo= JSON.parse(localStorage.getItem('userinfo'));
@@ -20,7 +20,6 @@ const Post=(props)=>{
 
     const handleLike=()=>{
         props.setCurrentPostId(id);
-        console.log("I am in");
         dispatch(updatePost(id, {...props.post, likes: [...likes, userinfo.user.id] }, history, userinfo.jwt, props.setCurrentPostId));
     }
     
@@ -35,7 +34,6 @@ const Post=(props)=>{
                 <Col>
                     <Card.Img variant="top" src={files} height="400"/>
                 </Col>
-
                 <Col>
                     <Card.Body>
                         <Card.Title>{title}</Card.Title>
