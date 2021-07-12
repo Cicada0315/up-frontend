@@ -3,6 +3,7 @@ import NavBar from './components/NavBar';
 import Footer from './components/Footer';
 import About from './components/About';
 import Posts from './components/Posts'
+import IndividualPost from './components/IndividualPost';
 import Form from './components/Forms/PostForm';
 import Auth from './components/Forms/Auth'
 import { getPosts } from './actions/postsAction';
@@ -33,6 +34,7 @@ const App = () => {
             <Route exact path="/login" component={() => <Auth />} />
             <Route exact path="/posts/new" component={() => <Form currentPostId={currentPostId} setCurrentPostId={setCurrentPostId}/>} />
             <Route exact path="/posts/" component={() => <Posts currentPostId={currentPostId} setCurrentPostId={setCurrentPostId} setSubmitted={setSubmitted}/>} />
+            <Route exact path="/posts/:id" component={() => <IndividualPost currentPostId={currentPostId} setCurrentPostId={setCurrentPostId} setSubmitted={setSubmitted}/>} />
             <Route exact path="/posts/:currentPostId/edit" component={() => <Form currentPostId={currentPostId} setCurrentPostId={setCurrentPostId}/>} />
             <Route path="/about" component={() => <About />} />
             <Route path="/" render={() => <Posts currentPostId={currentPostId} setCurrentPostId={setCurrentPostId} setSubmitted={setSubmitted}/>} />

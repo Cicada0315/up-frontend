@@ -30,7 +30,7 @@ const PostForm = (props) => {
     const handleSubmit=(e)=>{
         e.preventDefault();
         if(currentPostId){
-            dispatch(updatePost(currentPostId, {...postinfo, user_id: userinfo.user.id }, history, userinfo.jwt, setCurrentPostId));
+            dispatch(updatePost(currentPostId, {...postinfo, user_id: userinfo.user.id }, history, userinfo.jwt, setCurrentPostId, 1));
         }else{
             dispatch(createPost({...postinfo, user_id: userinfo.user.id }, history, userinfo.jwt));
         }

@@ -7,12 +7,13 @@ export const getPosts = () => async (dispatch) => {
         dispatch({ type: 'FETCH_POSTS', payload: res.data });
     } catch (error) {
         console.log(error);
-        alert(error.response.data.errors);
+        alert(error.response);
     }
 };
 
 export const createPost = (post, history, token) => async (dispatch) => {
     try{
+        console.log(post);
         const res = await API.post('/posts', {
             Authorization: 'Bearer ' + token,
             post
@@ -25,7 +26,7 @@ export const createPost = (post, history, token) => async (dispatch) => {
     }
 };
 
-export const updatePost = (id, post, history, token, setCurrentPostId) => async (dispatch) => {
+export const updatePost = (id, post, history, token, setCurrentPostId, flag=0) => async (dispatch) => {
     try {
         const res = await API.patch(`/posts/${id}`, {
             Authorization: 'Bearer ' + token,
@@ -33,7 +34,11 @@ export const updatePost = (id, post, history, token, setCurrentPostId) => async 
         })
         dispatch({ type: 'UPDATE_POST', payload: res.data });
         setCurrentPostId(null);
-        history.push('/posts');
+        if(flag===1){
+            history.push(`/posts/${id}`);
+        }else{
+            history.push('/posts'); 
+        }
     } catch (error) {
         console.log(error.response);
         alert(error.response.data.errors);

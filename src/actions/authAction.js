@@ -9,7 +9,8 @@ export const signup = (inputs, history) => async (dispatch) => {
               firstname: inputs.firstname,
               lastname: inputs.lastname,
               email: inputs.email,
-              password: inputs.password
+              password: inputs.password,
+              password_confirmation: inputs.cpassword
             }
         });
         const data=res.data;
