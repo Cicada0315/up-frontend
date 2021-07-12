@@ -63,7 +63,7 @@ const PostForm = (props) => {
 
                     <Form.Group controlId="content">
                     <Form.Label>content</Form.Label>
-                    <Form.Control as="textarea" name="content" value={postinfo.content} onChange={handleonChange} />
+                    <Form.Control as="textarea" rows={3} name="content" value={postinfo.content} onChange={handleonChange} />
                     </Form.Group>
 
                     <Form.Group controlId="content">

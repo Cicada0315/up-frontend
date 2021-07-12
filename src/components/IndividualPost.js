@@ -6,7 +6,6 @@ import { deletePost, updatePost } from '../actions/postsAction'
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory, useParams } from 'react-router-dom';
 import ThumbsUp from '../images/ThumbsUp.png'
-import View from '../images/view.png'
 
 const IndividualPost=(props)=>{
     const dispatch=useDispatch();
@@ -15,6 +14,7 @@ const IndividualPost=(props)=>{
     const { id } = useParams();
     const posts = useSelector((state) => state.posts);
     const post=posts.find(p=> p.id===parseInt(id));
+    console.log(posts)
 
     const handleEdit=()=>{
         props.setCurrentPostId(post.id);
@@ -33,6 +33,7 @@ const IndividualPost=(props)=>{
 
 
     return (
+        !post? <div className="bg-light">The Post doesn't exist</div>:
         <div className="bg-light">
             {(userinfo && userinfo.user.id === post.user.id) &&
                 (<div style={{textAlign: "right"}}><Button variant="outline-primary" onClick={handleEdit}><img src={Edit} width="20" height="20" alt="edit"/>Edit</Button>
