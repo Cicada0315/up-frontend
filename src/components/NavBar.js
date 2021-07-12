@@ -44,10 +44,9 @@ const NavBar=()=>{
 
     const handleSubmit=(e)=>{
         e.preventDefault();
-        console.log(search);
         dispatch(getSearchedPosts(search));
         setsearch({
-            query: ""
+            query: ''
         })
     };
 
@@ -68,7 +67,7 @@ const NavBar=()=>{
             </Navbar.Collapse>
             <Navbar.Collapse className="justify-content-end">
             <Form inline onSubmit={handleSubmit}>
-                <FormControl onChange={handleonChange} type="text" placeholder="Search" className="mr-sm-2" />
+                <FormControl onChange={handleonChange} type="text" placeholder="Search" value={search.query} className="mr-sm-2" />
                 <Button variant="outline-light" type="submit">Search</Button>
             </Form>
             </Navbar.Collapse>
