@@ -32,16 +32,16 @@ const NavBar=()=>{
     }
 
     return(
-        <Navbar bg="light" expand="lg">
+        <Navbar bg="primary" variant="dark" expand="lg">
             <Navbar.Brand href="/"><img src={logo} width="30" height="30" alt="logo"/> UP</Navbar.Brand>
             <Navbar.Toggle aria-controls="basic-navbar-nav" />
             <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="me-auto">
                 <Nav.Link href="/about">AboutUps</Nav.Link>
                 <Nav.Link href="/posts">AllUps</Nav.Link>
-                {!user?(<><Button variant="primary" onClick={()=>{history.push("/login")}}> Sign In</Button></>):
+                {!user?(<><Button variant="outline-light" onClick={()=>{history.push("/login")}}> Sign In</Button></>):
                     (<><Nav.Link href="/posts/new">CreateUp</Nav.Link>
-                    <Button variant="primary" onClick={logout}>Sign Out</Button></>)
+                    <Button variant="outline-light" onClick={logout}>Sign Out</Button></>)
                 }
             </Nav>
             </Navbar.Collapse>
