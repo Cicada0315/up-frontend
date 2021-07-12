@@ -2,20 +2,31 @@ import React from 'react'
 import {Card, Col, Row, Button} from 'react-bootstrap';
 import Edit from '../images/edit.png'
 import Delete from '../images/Black_Trash.ico'
-import { deletePost } from '../actions/postsAction'
+import ThumbsUp from '../images/ThumbsUp.png'
+import { deletePost, updatePost } from '../actions/postsAction'
 import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 
-import { Link } from "react-router-dom";
-
 const Post=(props)=>{
-    const { title, content, files, id, user } =props.post
+    const { title, content, files, id, user, likes } =props.post
     const dispatch=useDispatch();
     const history= useHistory();
     const userinfo= JSON.parse(localStorage.getItem('userinfo'));
+    
+    const handleEdit=()=>{
+        props.setCurrentPostId(id);
+        history.push(`/posts/${id}/edit`);
+    }
+
+    const handleLike=()=>{
+        props.setCurrentPostId(id);
+        console.log("I am in");
+        dispatch(updatePost(id, {...props.post, likes: [...likes, userinfo.user.id] }, history, userinfo.jwt, props.setCurrentPostId));
+    }
+    
     const handleDelete=()=>{
-        props.setSubmitted(true)
-        dispatch(deletePost(id, history, userinfo.jwt, props.setSubmitted))
+        props.setSubmitted(true);
+        dispatch(deletePost(id, history, userinfo.jwt, props.setSubmitted));
     }
     
     return (
@@ -35,10 +46,17 @@ const Post=(props)=>{
                     </Card.Body>
                 </Col>
             </Row>
-            <Card.Footer style={{textAlign: "right"}}>
-                {(userinfo && userinfo.user.id === user.id) &&
-                    (<><Button variant="light" onClick={()=> props.setCurrentPostId(id)}><Link to={`/posts/${id}/edit`} style={{color: 'black', textDecoration: 'none'}}><img src={Edit} width="30" height="30" alt="logo"/>Edit</Link></Button>
-                    <Button variant="light" onClick={handleDelete}><img src={Delete} width="30" height="30" alt="logo"/>Delete</Button></>)}    
+            <Card.Footer >
+                <Row>
+                    <Col>
+                        <Button variant="light" onClick={handleLike}><img src={ThumbsUp} width="30" height="30" alt="logo"/>Likes {likes.length}</Button>
+                    </Col>
+                    <Col style={{textAlign: "right"}}>
+                    {(userinfo && userinfo.user.id === user.id) &&
+                        (<><Button variant="light" onClick={handleEdit}><img src={Edit} width="30" height="30" alt="logo"/>Edit</Button>
+                        <Button variant="light" onClick={handleDelete}><img src={Delete} width="30" height="30" alt="logo"/>Delete</Button></>)}   
+                    </Col>
+                </Row>
             </Card.Footer>
         </Card>
     )

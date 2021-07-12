@@ -16,7 +16,8 @@ export const signup = (inputs, history) => async (dispatch) => {
         dispatch({ type: 'LOG_IN', data });
         history.push('/');
     } catch (error) {
-        console.log(error);
+        console.log(error.response);
+        alert(error.response.data.errors);
     }
 };
 
@@ -33,5 +34,6 @@ export const signin = (inputs, history) => async (dispatch) => {
         history.push('/');
     } catch (error) {
         console.log(error);
+        alert(error.response.data.errors);
     }
 };

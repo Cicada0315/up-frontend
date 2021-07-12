@@ -7,6 +7,7 @@ export const getPosts = () => async (dispatch) => {
         dispatch({ type: 'FETCH_POSTS', payload: res.data });
     } catch (error) {
         console.log(error);
+        alert(error.response.data.errors);
     }
 };
 
@@ -20,6 +21,7 @@ export const createPost = (post, history, token) => async (dispatch) => {
         history.push('/posts');
     } catch (error){
         console.log(error);
+        alert(error.response.data.errors);
     }
 };
 
@@ -33,14 +35,15 @@ export const updatePost = (id, post, history, token, setCurrentPostId) => async 
         setCurrentPostId(null);
         history.push('/posts');
     } catch (error) {
-        console.log(error);
+        console.log(error.response);
+        alert(error.response.data.errors);
     }
 };
 
 export const deletePost = (id, history, token, setSubmitted) => async (dispatch) => {
     try {
-        await API.delete(`/posts/${id}`)
-        await dispatch({ type: 'DELETE_POST', payload: id });
+        await API.delete(`/posts/${id}`);
+        dispatch({ type: 'DELETE_POST', payload: id });
         setSubmitted(false);
         history.push('/posts');
     } catch (error) {
