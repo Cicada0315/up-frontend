@@ -39,7 +39,7 @@ const NavBar=()=>{
             <Nav className="me-auto">
                 <Nav.Link href="/about">AboutUps</Nav.Link>
                 <Nav.Link href="/posts">AllUps</Nav.Link>
-                {!user?(<><Nav.Link href="/login"><Button variant="primary">Sign In</Button></Nav.Link></>):
+                {!user?(<><Button variant="primary" onClick={()=>{history.push("/login")}}> Sign In</Button></>):
                     (<><Nav.Link href="/posts/new">CreateUp</Nav.Link>
                     <Button variant="primary" onClick={logout}>Sign Out</Button></>)
                 }
