@@ -33,19 +33,19 @@ const IndividualPost=(props)=>{
 
 
     return (
-        <div>
+        <div className="bg-light">
             {(userinfo && userinfo.user.id === post.user.id) &&
-                (<div style={{textAlign: "right"}}><Button variant="outline-secondary" onClick={handleEdit}><img src={Edit} width="20" height="20" alt="edit"/>Edit</Button>
-            <Button variant="outline-secondary" onClick={handleDelete}><img src={Delete} width="20" height="20" alt="delete"/>Delete</Button></div>)}
+                (<div style={{textAlign: "right"}}><Button variant="outline-primary" onClick={handleEdit}><img src={Edit} width="20" height="20" alt="edit"/>Edit</Button>
+            <Button variant="outline-primary" onClick={handleDelete}><img src={Delete} width="20" height="20" alt="delete"/>Delete</Button></div>)}
             <h4>by. {post.user.firstname+" "+post.user.lastname}</h4>   
             <h1>{post.title}</h1>
-            <p>{post.created_at.split("T")[0]}  <img src={View} width="15" height="15" alt="view"/>{post.view}</p>
+            <p>{post.created_at.split("T")[0]}  Views {post.view}</p>
 
             <img src={post.files} alt="file" className="img-fluid"/>
             <p>{post.content}</p>
             
             <Button variant="light" onClick={handleLike}><img src={ThumbsUp} width="15" height="15" alt="like"/>{post.likes.length}{" "}</Button><br/>
-            <Button variant="outline-secondary" onClick={()=> history.push("/posts")}>Back</Button>
+            <Button variant="outline-primary" onClick={()=> history.push("/posts")}>Back</Button>
         </div>
     )
 

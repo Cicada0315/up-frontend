@@ -3,7 +3,7 @@ import welcome from '../images/welcome.gif';
 
 const About=()=>{
     return(
-        <div style={{backgroundColor: "Azure", textAlign: "center"}}>
+        <div className="bg-light text-center">
             <h1><strong>"Up"</strong> is here to entertain you!</h1> 
             <h4>In "Up", you can view bunch of random stories, images or clips. <br/>
                 If you are tired watching other ppl's posts, you can upload your own posts. <br/>
