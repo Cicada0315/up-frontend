@@ -28,10 +28,17 @@ export const createPost = (post, history, token) => async (dispatch) => {
 
 export const updatePost = (id, post, history, token, setCurrentPostId, flag=0) => async (dispatch) => {
     try {
-        const res = await API.patch(`/posts/${id}`, {
-            Authorization: 'Bearer ' + token,
-            post
-        })
+        let res;
+        if(token===null){
+            res = await API.patch(`/posts/${id}`, {
+                post
+            })
+        }else{
+            res = await API.patch(`/posts/${id}`, {
+                Authorization: 'Bearer ' + token,
+                post
+            })
+        }
         dispatch({ type: 'UPDATE_POST', payload: res.data });
         setCurrentPostId(null);
         if(flag===1){

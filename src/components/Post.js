@@ -7,14 +7,19 @@ import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 
 const Post=(props)=>{
-    const { title, content, files, id, user, likes, view, created_at } =props.post;
+    const { title, files, id, user, likes, view, created_at } =props.post;
     const dispatch=useDispatch();
     const history= useHistory();
     const userinfo= JSON.parse(localStorage.getItem('userinfo'));
 
     const routeChange = () =>{
         props.setCurrentPostId(id);
-        dispatch(updatePost(id, {...props.post, view: view+1 }, history, userinfo.jwt, props.setCurrentPostId, 1));  
+        if(userinfo){
+            dispatch(updatePost(id, {...props.post, view: view+1 }, history, userinfo.jwt, props.setCurrentPostId, 1)); 
+        }else{
+            dispatch(updatePost(id, {...props.post, view: view+1 }, history, null, props.setCurrentPostId, 1)); 
+        }
+         
     }
 
     return (
