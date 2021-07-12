@@ -4,7 +4,7 @@ export default function posts(state= [], action){
             return action.payload;
            
         case 'CREATE_POST':
-            return [...state, action.payload];
+            return [action.payload, ...state];
         
         case 'UPDATE_POST':
             return state.map((state) => (state._id === action.payload.id ? action.payload : state));

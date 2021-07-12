@@ -27,9 +27,6 @@ const Post=(props)=>{
                 <Col>
                     <Card.Title>{title}</Card.Title>
                     <Card.Subtitle className="mb-2 text-muted">by. {user.firstname+" "+user.lastname} {created_at.split("T")[0]}</Card.Subtitle>
-                    <Card.Text>
-                    {content}
-                    </Card.Text>
                     <img src={ThumbsUp} width="15" height="15" alt="like"/>{likes.length}{" "}
                     <img src={View} width="15" height="15" alt="view"/>{view}
                 </Col>

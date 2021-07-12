@@ -44,7 +44,9 @@ const IndividualPost=(props)=>{
             <img src={post.files} alt="file" className="img-fluid"/>
             <p>{post.content}</p>
             
-            <Button variant="light" onClick={handleLike}><img src={ThumbsUp} width="15" height="15" alt="like"/>{post.likes.length}{" "}</Button><br/>
+            <Button variant="light" onClick={handleLike}><img src={ThumbsUp} width="15" height="15" alt="like"/>{post.likes.length}{" "}</Button>
+            <br/>
+            <br/>
             <Button variant="outline-primary" onClick={()=> history.push("/posts")}>Back</Button>
         </div>
     )
