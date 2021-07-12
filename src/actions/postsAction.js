@@ -55,3 +55,13 @@ export const deletePost = (id, history, token, setSubmitted) => async (dispatch)
         console.log(error);
     }
 };
+
+export const getSearchedPosts = (search) => async (dispatch) => {
+    try {
+        console.log(search.query);
+        const res = await API.get(`/posts?search=${search.query}`);
+        dispatch({ type: 'FETCH_POSTS', payload: res.data });
+    } catch (error) {
+        console.log(error);
+    }
+};
